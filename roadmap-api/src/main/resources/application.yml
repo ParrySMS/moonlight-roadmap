@@ -1,0 +1,47 @@
+spring:
+  profiles:
+    active: dev
+
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+  data-source:
+    my-sql:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      minimum-idle: 1
+      maximum-pool-size: 3
+      connection-init-sql: select 1
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+server:
+  port: 9090
+  servlet:
+    context-path: /api/v1/
+  tomcat:
+    max-http-post-size: 104857600
+    max-swallow-size: 104857600
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSS} requestId=%X{RequestId} [%class{0} %level] %msg %n"
+  level:
+    com: INFO
+
+mybatis:
+  type-handlers-package: com.moonlight.cis.roadmapapi.common.mybatis.handler.impl
+
+---
+environment: dev
+
+spring:
+  profiles: dev
+  data-source:
+    my-sql:
+      url: jdbc:mysql://localhost:3308?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+      username: your
+      password: your
