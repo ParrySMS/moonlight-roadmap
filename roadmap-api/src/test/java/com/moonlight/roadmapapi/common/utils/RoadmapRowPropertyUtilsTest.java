@@ -190,7 +190,7 @@ class RoadmapRowPropertyUtilsTest {
     }
 
     @Test
-    void getDateEmptyRows(){
+    void getDateEmptyRows() {
         List<RoadmapRow> rows = new ArrayList<>();
         Date minDate = RoadmapRowPropertyUtils.getMinReleaseStartDate(rows);
         Date maxDate = RoadmapRowPropertyUtils.getMaxReleaseEndDate(rows);
@@ -215,7 +215,7 @@ class RoadmapRowPropertyUtilsTest {
                 .setReleaseEndDate(maxRangeDate);
         Date minDate = RoadmapRowPropertyUtils.getMinReleaseStartDate(rows);
         Date maxDate = RoadmapRowPropertyUtils.getMaxReleaseEndDate(rows);
-        Assert.assertEquals(zeroDate,minDate);
-        Assert.assertEquals(maxRangeDate,maxDate);
+        Assert.assertEquals(zeroDate, minDate);
+        Assert.assertEquals(maxRangeDate, maxDate);
     }
 }

@@ -12,10 +12,10 @@ import java.util.List;
 @Builder
 public class RoadmapPanel {
     @JsonProperty("min_date")
-    @JsonFormat(pattern="MM/dd/yyyy",timezone = "GMT+8")
+    @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT+8")
     public Date minDate;
     @JsonProperty("max_date")
-    @JsonFormat(pattern="MM/dd/yyyy",timezone = "GMT+8")
+    @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT+8")
     public Date maxDate;
     public List<RoadmapRow> rows;
 }

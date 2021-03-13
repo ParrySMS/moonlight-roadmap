@@ -1,7 +1,7 @@
 package com.moonlight.roadmapapi.service;
 
-import com.moonlight.roadmapapi.mockRepo.MockRepo;
 import com.moonlight.roadmapapi.entity.RoadmapPanel;
+import com.moonlight.roadmapapi.mockRepo.MockRepo;
 import com.moonlight.roadmapapi.repository.PLGoalRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

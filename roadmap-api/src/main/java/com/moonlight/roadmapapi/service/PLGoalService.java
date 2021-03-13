@@ -2,10 +2,10 @@ package com.moonlight.roadmapapi.service;
 
 import com.amazonaws.util.CollectionUtils;
 import com.moonlight.roadmapapi.common.utils.RoadmapRowPropertyUtils;
-import com.moonlight.roadmapapi.repository.PLGoalRepository;
 import com.moonlight.roadmapapi.entity.PLGoalState;
-import com.moonlight.roadmapapi.entity.RoadmapRow;
 import com.moonlight.roadmapapi.entity.RoadmapPanel;
+import com.moonlight.roadmapapi.entity.RoadmapRow;
+import com.moonlight.roadmapapi.repository.PLGoalRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +40,20 @@ public class PLGoalService {
     public RoadmapPanel getAllPLGoals(Date startDate, Date endDate) {
         return setPLProperties(
                 plGoalRepo.getPLRows(
-                        startDate, endDate, 0, RoadmapRowPropertyUtils.DEF_PAGE_SIZE));
+                        startDate,
+                        endDate,
+                        0,
+                        RoadmapRowPropertyUtils.DEF_PAGE_SIZE));
     }
 
     public RoadmapPanel getPLGoalsInPrograms(List<String> programNames, Date startDate, Date endDate) {
         return setPLProperties(
-                plGoalRepo.getPLRowsInPrograms(programNames, startDate, endDate, 0, RoadmapRowPropertyUtils.DEF_PAGE_SIZE));
+                plGoalRepo.getPLRowsInPrograms(
+                        programNames,
+                        startDate,
+                        endDate,
+                        0,
+                        RoadmapRowPropertyUtils.DEF_PAGE_SIZE));
     }
 
 }

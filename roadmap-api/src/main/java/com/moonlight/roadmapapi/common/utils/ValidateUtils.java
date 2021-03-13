@@ -11,31 +11,39 @@ import java.util.Date;
 import java.util.Optional;
 
 public class ValidateUtils {
+    private ValidateUtils() {
+    }
+
     private static final String YMD_DATE_FORMAT = "yyyy/MM/dd";
 
     public static <T> void notNull(T value, String paramName) throws ValidationException {
-        if (value == null)
+        if (value == null) {
             throw new ValidationException(paramName + " should not be null");
+        }
     }
 
     public static <T> void internalNotNull(T value) throws RoadmapException {
-        if (value == null)
+        if (value == null) {
             throw new RoadmapException(RoadmapResponseStatus.SYSTEM_INTERNAL_ERROR);
+        }
     }
 
     public static void notNullOrEmpty(String value, String paramName) throws ValidationException {
-        if (value == null || value.isEmpty())
+        if (value == null || value.isEmpty()) {
             throw new ValidationException(paramName + " should not be null or empty");
+        }
     }
 
     public static void min(int value, int minimum, String paramName) throws ValidationException {
-        if (value < minimum)
+        if (value < minimum) {
             throw new ValidationException(paramName + " minimum is " + minimum);
+        }
     }
 
     public static void doubleMin(double value, double minimum, String paramName) throws ValidationException {
-        if (value < minimum)
+        if (value < minimum) {
             throw new ValidationException(paramName + " minimum is " + minimum);
+        }
     }
 
     public static Date parseDate(String dateString) throws ValidationException, ParseException {
@@ -61,13 +69,19 @@ public class ValidateUtils {
     }
 
     public static class Friendly {
-        public static void assertTrue(boolean condition, String friendlyMessage) throws ValidationException {
-            if (!condition)
-                throw new ValidationException(friendlyMessage);
+        private Friendly() {
         }
-        public static void assertFalse(boolean condition, String friendlyMessage) throws ValidationException {
-            if (condition)
+
+        public static void assertTrue(boolean condition, String friendlyMessage) throws ValidationException {
+            if (!condition) {
                 throw new ValidationException(friendlyMessage);
+            }
+        }
+
+        public static void assertFalse(boolean condition, String friendlyMessage) throws ValidationException {
+            if (condition) {
+                throw new ValidationException(friendlyMessage);
+            }
         }
     }
 }

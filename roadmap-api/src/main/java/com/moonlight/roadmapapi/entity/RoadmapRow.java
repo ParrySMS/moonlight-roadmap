@@ -3,7 +3,6 @@ package com.moonlight.roadmapapi.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,10 +19,10 @@ public class RoadmapRow {
     @JsonProperty("report_color")
     public String reportColor;
     @JsonProperty("start_date")
-    @JsonFormat(pattern="MM/dd/yyyy",timezone = "GMT+8")
+    @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT+8")
     public Date releaseStartDate;
     @JsonProperty("end_date")
-    @JsonFormat(pattern="MM/dd/yyyy",timezone = "GMT+8")
+    @JsonFormat(pattern = "MM/dd/yyyy", timezone = "GMT+8")
     public Date releaseEndDate;
     @JsonProperty("percent_completed")
     public int completedPercent;//eg. 30 = storyPointsAccepted/storyPointsTotal

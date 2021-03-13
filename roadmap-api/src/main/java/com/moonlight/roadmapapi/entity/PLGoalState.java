@@ -12,7 +12,7 @@ import java.util.Optional;
 public enum PLGoalState {
     NOT_STARTED(1, "Not Started"),
     IN_PROGRESS(2, "In Progress"),
-    Done(3, "Done");
+    DONE(3, "Done");
 
     public final int id;
     public final String message;

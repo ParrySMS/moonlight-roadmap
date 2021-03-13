@@ -7,11 +7,14 @@ import com.moonlight.roadmapapi.entity.RoadmapRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class RoadmapRowPropertyUtils {
+    private RoadmapRowPropertyUtils() {
+    }
+
     public static final int DEF_PAGE_SIZE = 1000;
     private static final Logger logger = LoggerFactory.getLogger(RoadmapRowPropertyUtils.class);
 
@@ -47,8 +50,8 @@ public class RoadmapRowPropertyUtils {
             return row;
         }
 
-        if (accept > total) { //accept > 0
-            row.setCompletedPercent(100); //100 percent
+        if (accept > total) {
+            row.setCompletedPercent(100);
             return row;
         }
 

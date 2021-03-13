@@ -1,6 +1,5 @@
 package com.moonlight.roadmapapi.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

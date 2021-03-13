@@ -39,7 +39,6 @@ mybatis:
 environment: dev
 
 spring:
-  profiles: dev
   data-source:
     my-sql:
       url: jdbc:mysql://localhost:3308?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false

@@ -2,7 +2,10 @@ package com.moonlight.roadmapapi.repository;
 
 import com.moonlight.roadmapapi.common.mybatis.handler.Shema;
 import com.moonlight.roadmapapi.entity.RoadmapRow;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 import java.util.List;
@@ -12,11 +15,19 @@ public interface EpicRepository {
     // mybatis consider <= as a new <script>, so just use &lt;=
     // Refer: https://blog.csdn.net/xuanzhangran/article/details/60329357?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
 
-    String selectPropertiesFromEpicAsE = " SELECT E.id,E.name,E.state,E.report_color,E.release_start_date,E.release_end_date,E.story_points_total,E.story_points_accepted " +
-            " FROM " + Shema.SCHEMA_ROADMAP + ".epic AS E ";
+    String SELECT_PROPERTIES_FROM_EPIC_AS_E =
+            " SELECT E.id," +
+                    "E.name," +
+                    "E.state," +
+                    "E.report_color," +
+                    "E.release_start_date," +
+                    "E.release_end_date," +
+                    "E.story_points_total," +
+                    "E.story_points_accepted " +
+                    " FROM " + Shema.SCHEMA_ROADMAP + ".epic AS E ";
 
     @Select({"<script> " +
-            selectPropertiesFromEpicAsE +
+            SELECT_PROPERTIES_FROM_EPIC_AS_E +
             "<where> " +
             "  <if test='initiativeId!=null'>" +
             "    initiative_id = #{initiativeId} " +
@@ -38,7 +49,7 @@ public interface EpicRepository {
     List<RoadmapRow> getEpicRows(String initiativeId, Date startDate, Date endDate, int offset, int pageSize);
 
     @Select({"<script>" +
-            selectPropertiesFromEpicAsE +
+            SELECT_PROPERTIES_FROM_EPIC_AS_E +
             " INNER JOIN " + Shema.SCHEMA_ROADMAP + ".epic_program AS EP on EP.epic_id = E.id " +
             "<where>" +
             "  <if test='programNames!=null'>" +

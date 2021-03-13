@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * @author L
+ */
+
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @AllArgsConstructor
 public enum EpicState {

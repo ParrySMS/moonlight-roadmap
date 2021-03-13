@@ -4,39 +4,39 @@ import com.moonlight.roadmapapi.common.exception.RoadmapException;
 import com.moonlight.roadmapapi.common.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ValidateUtilsTest {
 
     @Test
     void notNull() {
-        assertThrows(ValidationException.class,()->{
-            ValidateUtils.notNull(null,"Integer");
+        assertThrows(ValidationException.class, () -> {
+            ValidateUtils.notNull(null, "Integer");
         });
     }
 
     @Test
     void internalNotNull() {
-        assertThrows(RoadmapException.class,()->{
+        assertThrows(RoadmapException.class, () -> {
             ValidateUtils.internalNotNull(null);
         });
     }
 
     @Test
     void notNullOrEmpty() {
-        assertThrows(ValidationException.class,()-> {
-            ValidateUtils.notNullOrEmpty(null,"null");
+        assertThrows(ValidationException.class, () -> {
+            ValidateUtils.notNullOrEmpty(null, "null");
         });
 
-        assertThrows(ValidationException.class,()-> {
-            ValidateUtils.notNullOrEmpty("","");
+        assertThrows(ValidationException.class, () -> {
+            ValidateUtils.notNullOrEmpty("", "");
         });
     }
 
     @Test
     void min() {
-        assertThrows(ValidationException.class,()-> {
-            ValidateUtils.min(-123,0,"");
+        assertThrows(ValidationException.class, () -> {
+            ValidateUtils.min(-123, 0, "");
         });
     }
 
@@ -50,7 +50,7 @@ class ValidateUtilsTest {
     @Test
     void friendlyAssertTrue() {
         assertThrows(ValidationException.class, () -> {
-            ValidateUtils.Friendly.assertTrue(false,  "message");
+            ValidateUtils.Friendly.assertTrue(false, "message");
         });
     }
 }

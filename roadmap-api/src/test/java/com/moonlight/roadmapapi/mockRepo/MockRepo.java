@@ -1,10 +1,10 @@
 package com.moonlight.roadmapapi.mockRepo;
 
+import com.moonlight.roadmapapi.entity.Entity;
 import com.moonlight.roadmapapi.entity.EpicState;
 import com.moonlight.roadmapapi.entity.InitiativeState;
 import com.moonlight.roadmapapi.entity.PLGoalState;
 import com.moonlight.roadmapapi.entity.RoadmapRow;
-import com.moonlight.roadmapapi.entity.Entity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public class MockRepo {
     private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/mm/dd");
-    public final static int MOCK_ROW_SIZE = 3 ;
+    public final static int MOCK_ROW_SIZE = 3;
 
     public static List<RoadmapRow> getEpicRows() throws ParseException {
         List<RoadmapRow> rows = setPLInitEpicRow(Entity.newRows(MOCK_ROW_SIZE));
@@ -36,12 +36,12 @@ public class MockRepo {
     public static List<RoadmapRow> getPLRows() throws ParseException {
         List<RoadmapRow> rows = setPLInitEpicRow(Entity.newRows(MOCK_ROW_SIZE));
         rows.get(0).setStateCode(PLGoalState.IN_PROGRESS.id);
-        rows.get(1).setStateCode(PLGoalState.Done.id);
+        rows.get(1).setStateCode(PLGoalState.DONE.id);
         rows.get(2).setStateCode(PLGoalState.NOT_STARTED.id);
         return rows;
     }
 
-    private static List<RoadmapRow> setPLInitEpicRow(List<RoadmapRow> rows) throws  ParseException{
+    private static List<RoadmapRow> setPLInitEpicRow(List<RoadmapRow> rows) throws ParseException {
         rows.get(0)
                 .setId("id0")
                 .setName("name0")
@@ -74,6 +74,6 @@ public class MockRepo {
         Date dateB = simpleDateFormat.parse("2015/10/30");
         Date dateC = simpleDateFormat.parse("2018/10/30");
         Date dateD = simpleDateFormat.parse("2020/10/30");
-        return Stream.of(dateA,dateB,dateC,dateD).collect(Collectors.toList());
+        return Stream.of(dateA, dateB, dateC, dateD).collect(Collectors.toList());
     }
 }

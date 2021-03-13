@@ -2,18 +2,30 @@ package com.moonlight.roadmapapi.repository;
 
 import com.moonlight.roadmapapi.common.mybatis.handler.Shema;
 import com.moonlight.roadmapapi.entity.RoadmapRow;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 import java.util.List;
 
 @Mapper
 public interface InitiativeRepository {
-    String selectPropertiesFromInitiativeAsI = " SELECT I.id,I.name,I.state,I.report_color,I.release_start_date,I.release_end_date,I.story_points_total,I.story_points_accepted " +
-            "FROM " + Shema.SCHEMA_ROADMAP + ".initiative AS I ";
+    String SELECT_PROPERTIES_FROM_INITIATIVE_AS_I =
+            " SELECT I.id," +
+                    "I.name," +
+                    "I.state," +
+                    "I.report_color," +
+                    "I.release_start_date," +
+                    "I.release_end_date," +
+                    "I.story_points_total," +
+                    "I.story_points_accepted " +
+                    "FROM " + Shema.SCHEMA_ROADMAP + ".initiative AS I ";
 
     @Select({"<script> " +
-            selectPropertiesFromInitiativeAsI +
+            SELECT_PROPERTIES_FROM_INITIATIVE_AS_I +
             "<where> " +
             "  <if test='plGoalId!=null'>" +
             "    pl_goal_id = #{plGoalId} " +
@@ -35,7 +47,7 @@ public interface InitiativeRepository {
     List<RoadmapRow> getInitRows(String plGoalId, Date startDate, Date endDate, int offset, int pageSize);
 
     @Select({"<script> " +
-            selectPropertiesFromInitiativeAsI +
+            SELECT_PROPERTIES_FROM_INITIATIVE_AS_I +
             " INNER JOIN " + Shema.SCHEMA_ROADMAP + ".initiative_program AS IP on IP.initiative_id = I.id " +
             "<where>" +
             "  <if test='programNames!=null'>" +

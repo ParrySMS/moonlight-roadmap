@@ -2,7 +2,11 @@ package com.moonlight.roadmapapi.repository;
 
 import com.moonlight.roadmapapi.common.mybatis.handler.Shema;
 import com.moonlight.roadmapapi.entity.RoadmapRow;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 import java.util.List;
@@ -10,11 +14,19 @@ import java.util.List;
 @Mapper
 public interface PLGoalRepository {
 
-    String selectPropertiesFromPlGoalAsPL = "SELECT PL.id,PL.name,PL.state,PL.report_color,PL.release_start_date,PL.release_end_date,PL.story_points_total,PL.story_points_accepted " +
-            " FROM " + Shema.SCHEMA_ROADMAP + ".pl_goal AS PL ";
+    String SELECT_PROPERTIES_FROM_PL_GOAL_AS_PL =
+            "SELECT PL.id," +
+                    "PL.name," +
+                    "PL.state," +
+                    "PL.report_color," +
+                    "PL.release_start_date," +
+                    "PL.release_end_date," +
+                    "PL.story_points_total," +
+                    "PL.story_points_accepted " +
+                    " FROM " + Shema.SCHEMA_ROADMAP + ".pl_goal AS PL ";
 
     @Select({"<script> " +
-            selectPropertiesFromPlGoalAsPL +
+            SELECT_PROPERTIES_FROM_PL_GOAL_AS_PL +
             "<where> " +
             "  <if test='startDate!=null and endDate!=null'>" +
             "    AND release_start_date >= #{startDate} AND release_end_date &lt;= #{endDate} " +
@@ -33,7 +45,7 @@ public interface PLGoalRepository {
     List<RoadmapRow> getPLRows(Date startDate, Date endDate, int offset, int pageSize);
 
     @Select({"<script> " +
-            selectPropertiesFromPlGoalAsPL +
+            SELECT_PROPERTIES_FROM_PL_GOAL_AS_PL +
             " INNER JOIN " + Shema.SCHEMA_ROADMAP + ".pl_goal_program AS PLPG on PLPG.pl_goal_id = PL.id " +
             "<where>" +
             "  <if test='programNames!=null'>" +
