@@ -1,4 +1,4 @@
 database:
   url: jdbc:mysql://localhost:3308/roadmap?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
   user: root
-  password: P@ssWord2root
+  password: 
