@@ -1,0 +1,30 @@
+CREATE TABLE `epic`
+(
+    `id`                    varchar(63)      NOT NULL,
+    `jira_number_id`        int(11)          NOT NULL,
+    `name`                  text             NOT NULL,
+    `description`           text,
+    `rank`                  int(11)          NOT NULL,
+    `state`                 tinyint(4)       NOT NULL COMMENT '0 - Pending Approval, 1 - Ready To Start, 2 - In Progress, 3 - Dev Complete, 4 - Test Complete, 5 - Accepted',
+    `health`                tinyint(4)       NOT NULL COMMENT '1 - No Health, 2 - Done, 3 - At Risk, 4 - Critical/Slip, 5 - On Track, 6 - On Hold',
+    `report_color`          varchar(63)               DEFAULT NULL,
+    `start_date`            date                      DEFAULT NULL,
+    `target_complete_date`  date                      DEFAULT NULL,
+    `portfolio_ask_date`    date                      DEFAULT NULL,
+    `releases`              text,
+    `release_start_date`    date                      DEFAULT NULL,
+    `release_end_date`      date                      DEFAULT NULL,
+    `story_points_total`    int(10) unsigned NOT NULL,
+    `story_points_accepted` int(10) unsigned NOT NULL,
+    `created_at`            datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `last_updated_at`       datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `epic_link`             varchar(63)               DEFAULT NULL COMMENT 'JIRA ticket number,eg CLP-1174',
+    `initiative_id`         varchar(63)               DEFAULT NULL,
+    `initiative_name`       text,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `epic_jira_id_UNIQUE` (`jira_number_id`),
+    KEY `initiative_id_epic_id` (`initiative_id`, `id`),
+    KEY `initiative_id` (`initiative_id`),
+    CONSTRAINT `epic_fk_initiative_id` FOREIGN KEY (`initiative_id`) REFERENCES `initiative` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4

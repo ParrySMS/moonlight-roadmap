@@ -1,0 +1,71 @@
+-- Program field is in all levels, we need to parse and aggregate them for each level
+--  For example, programs of pl_goal are from itself, initiative, epic and story levels.
+-- Program Increment field is the same as Program.
+-- Team field is in story level only, we need to aggregate them for the upper 3 levels.
+-- Currently, we will use release_start_date and release_end_date to indicate the time frame of the top 3 levels.
+
+-- We also need the relationship between Program and Program Increment as well as Program and Team.
+
+
+--- todo
+
+CREATE TABLE program_increment
+(
+    `index` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name`  VARCHAR(255)
+    -- start_date, end_date
+);
+CREATE TABLE pl_goal_pi
+(
+    `pl_goal_id` VARCHAR(63)  NOT NULL REFERENCES pl_goal (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    `pi_name`    VARCHAR(255) NOT NULL REFERENCES program_increment (`name`) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (`pl_goal_id`, `pi_name`)
+);
+CREATE TABLE initiative_pi
+(
+    `initiative_id` VARCHAR(63)  NOT NULL REFERENCES initiative (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    `pi_name`       VARCHAR(255) NOT NULL REFERENCES program_increment (`name`) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (`initiative_id`, `pi_name`)
+);
+CREATE TABLE epic_pi
+(
+    `epic_id` VARCHAR(63)  NOT NULL REFERENCES epic (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    `pi_name` VARCHAR(255) NOT NULL REFERENCES program_increment (`name`) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (`epic_id`, `pi_name`)
+);
+CREATE TABLE story_pi
+(
+    `story_id` VARCHAR(63)  NOT NULL REFERENCES story (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    `pi_name`  VARCHAR(255) NOT NULL REFERENCES program_increment (`name`) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (`story_id`, `pi_name`)
+);
+
+
+CREATE TABLE team
+(
+    `name` VARCHAR(255) PRIMARY KEY
+);
+CREATE TABLE pl_goal_team
+(
+    `pl_goal_id` VARCHAR(63)  NOT NULL REFERENCES pl_goal (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    `team_name`  VARCHAR(255) NOT NULL REFERENCES team (`name`) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (`pl_goal_id`, `team_name`)
+);
+CREATE TABLE initiative_team
+(
+    `initiative_id` VARCHAR(63)  NOT NULL REFERENCES initiative (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    `team_name`     VARCHAR(255) NOT NULL REFERENCES team (`name`) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (`initiative_id`, `team_name`)
+);
+CREATE TABLE epic_team
+(
+    `epic_id`   VARCHAR(63)  NOT NULL REFERENCES epic (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    `team_name` VARCHAR(255) NOT NULL REFERENCES team (`name`) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (`epic_id`, `team_name`)
+);
+CREATE TABLE story_team
+(
+    `story_id`  VARCHAR(63)  NOT NULL REFERENCES story (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    `team_name` VARCHAR(255) NOT NULL REFERENCES team (`name`) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (`story_id`, `team_name`)
+);
